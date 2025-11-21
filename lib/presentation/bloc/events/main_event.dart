@@ -15,3 +15,16 @@ class ConnectionErrorEvent extends MainEvents {}
 
 class RunEventEvent extends MainEvents {}
 class StopEventEvent extends MainEvents {}
+
+
+class LocalDateTimeEvent extends MainEvents {
+  final DateTime time;
+  LocalDateTimeEvent(this.time);
+}
+
+
+class SolanaDateTimeEvent extends MainEvents {
+  final DateTime time;
+  SolanaDateTimeEvent(this.time);
+}
+
