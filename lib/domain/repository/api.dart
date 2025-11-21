@@ -17,7 +17,6 @@ class MainApi {
       if (_controller == null) return;
 
       if (_controller!.isClosed) return;
-      print("run");
       _controller?.add(DateTime.now());
 
     });

@@ -36,7 +36,6 @@ class MainBloc extends Bloc<MainEvents, MainState> {
     if (state.runningState == ProcessStatus.run) return;
     emit(state.copyWith(networkState: ConnectionStatus.connecting, runningState: ProcessStatus.run));
     _localDateStream = api.startLocalStream().listen((value) {
-      print(["value", value]);
       add(LocalDateTimeEvent(value));
     });
     emit(state.copyWith(networkState: ConnectionStatus.connect,));
