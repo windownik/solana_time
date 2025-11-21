@@ -2,39 +2,41 @@
 
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:solana_time/presentation/bloc/events/main_event.dart';
-import 'package:solana_time/presentation/bloc/main_state.dart';
+import 'package:solana_time/presentation/bloc/state/main_state.dart';
+import 'package:solana_time/presentation/bloc/state/state_types.dart';
 
 
 
 class MainBloc extends Bloc<MainEvents, MainState> {
   MainBloc() : super(MainState.init()) {
-    on<StopEvent>(_onClickStop);
-    on<RunEvent>(_onClickRun);
+    on<StopEventEvent>(_onClickStop);
+    on<RunEventEvent>(_onClickRun);
 
-    on<SolanaTime>(_onClickSolana);
-    on<ClientTime>(_onClickClient);
-    on<BothTime>(_onClickBoth);
+    on<SolanaTimeEvent>(_onClickSolana);
+    on<ClientTimeEvent>(_onClickClient);
+    on<BothTimeEvent>(_onClickBoth);
 
   }
 
-  _onClickStop(StopEvent event, Emitter<MainState> emit) {
-    emit(state.copyWith(runEvent: StopEvent()));
+  _onClickStop(StopEventEvent event, Emitter<MainState> emit) {
+
+    emit(state.copyWith(runningState: ProcessStatus.stop));
   }
 
-  _onClickRun(RunEvent event, Emitter<MainState> emit) {
-    emit(state.copyWith(runEvent: RunEvent()));
+  _onClickRun(RunEventEvent event, Emitter<MainState> emit) {
+    emit(state.copyWith(runningState: ProcessStatus.run));
   }
 
-  _onClickSolana(SolanaTime event, Emitter<MainState> emit) {
-    emit(state.copyWith(runEvent: SolanaTime()));
+  _onClickSolana(SolanaTimeEvent event, Emitter<MainState> emit) {
+    emit(state.copyWith(timeState: TimeSource.solana));
   }
 
-  _onClickClient(ClientTime event, Emitter<MainState> emit) {
-    emit(state.copyWith(runEvent: ClientTime()));
+  _onClickClient(ClientTimeEvent event, Emitter<MainState> emit) {
+    emit(state.copyWith(timeState: TimeSource.local));
   }
 
-  _onClickBoth(BothTime event, Emitter<MainState> emit) {
-    emit(state.copyWith(runEvent: BothTime()));
+  _onClickBoth(BothTimeEvent event, Emitter<MainState> emit) {
+    emit(state.copyWith(timeState: TimeSource.both));
   }
 
 }
