@@ -2,6 +2,10 @@
 
 import 'package:flutter/material.dart';
 
+import '../widgets/run_stop_button.dart';
+import '../widgets/time_display_card.dart';
+import '../widgets/time_selector.dart';
+
 
 
 class HomePage extends StatelessWidget {
@@ -10,7 +14,29 @@ class HomePage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: Center(child: Text("Title")),
+      appBar: AppBar(
+        title: const Text("Solana Time App", style: TextStyle(color: Colors.white),),
+        backgroundColor: Colors.deepPurple,
+      ),
+      body: const Stack(
+        children: [
+          Center(child:
+           Column(
+            mainAxisSize: MainAxisSize.min,
+
+            children: [
+              TimeSelector(),
+              SizedBox(height: 20,),
+              TimeDisplayCard(),
+            ],
+          )),
+          Positioned(
+              right: 50,
+              bottom: 50,
+              child: RunStopButton()),
+
+        ],
+      ),
     );
   }
 }
