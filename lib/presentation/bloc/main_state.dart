@@ -12,16 +12,17 @@ class MainState extends Equatable {
     required this.networkEvent,
     required this.runEvent,
 });
+
   factory MainState.init() => MainState._(
-      timeEvent: SolanaTime(),
+      timeEvent: ClientTime(),
       networkEvent: Disconnected(),
       runEvent: StopEvent());
 
-  MainState copyWith(
-      MainEvents? timeEvent,
-      MainEvents? networkEvent,
-      MainEvents? runEvent,
-      ) =>
+  MainState copyWith({
+    MainEvents? timeEvent,
+    MainEvents? networkEvent,
+    MainEvents? runEvent,
+  }) =>
       MainState._(
       timeEvent: timeEvent ?? this.timeEvent,
       networkEvent: networkEvent ?? this.timeEvent,
