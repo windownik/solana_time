@@ -2,6 +2,8 @@
 
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:solana_time/di/service_locator.dart';
+import 'package:solana_time/domain/repository/api.dart';
 import 'package:solana_time/presentation/bloc/main_bloc.dart';
 
 import '../widgets/run_stop_button.dart';
@@ -16,7 +18,7 @@ class HomePage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return BlocProvider<MainBloc>(
-      create: (BuildContext context) => MainBloc(),
+      create: (BuildContext context) => MainBloc(api: getIt<MainApi>()),
       child: Scaffold(
         appBar: AppBar(
           title: const Text("Solana Time App", style: TextStyle(color: Colors.white),),
