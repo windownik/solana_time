@@ -1,17 +1,15 @@
 
 
-import '../presentation/bloc/events/main_event.dart';
+import '../presentation/bloc/state/state_types.dart';
 
 
-String getBtnTitle(MainEvents event) {
-  switch (event) {
-    case SolanaTime():
-      return "Solana time";
-    case ClientTime():
-      return "Client time";
-    case BothTime():
-      return "Both Time";
-    default:
-      return "Both time";
+String getBtnTitle(TimeSource source) {
+  switch (source) {
+    case TimeSource.solana:
+      return "Solana";
+    case TimeSource.local:
+      return "Client";
+    case TimeSource.both:
+      return "Both";
   }
 }
