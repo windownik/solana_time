@@ -4,6 +4,7 @@ import 'package:flutter/material.dart';
 
 import '../widgets/run_stop_button.dart';
 import '../widgets/time_display_card.dart';
+import '../widgets/time_selector.dart';
 
 
 
@@ -17,9 +18,18 @@ class HomePage extends StatelessWidget {
         title: const Text("Solana Time App", style: TextStyle(color: Colors.white),),
         backgroundColor: Colors.deepPurple,
       ),
-      body: Stack(
+      body: const Stack(
         children: [
-          Center(child: TimeDisplayCard()),
+          Center(child:
+           Column(
+            mainAxisSize: MainAxisSize.min,
+
+            children: [
+              TimeSelector(),
+              SizedBox(height: 20,),
+              TimeDisplayCard(),
+            ],
+          )),
           Positioned(
               right: 50,
               bottom: 50,
