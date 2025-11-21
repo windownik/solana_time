@@ -1,16 +1,17 @@
+abstract class MainEvents {}
 
-abstract class MainEvents{}
-
-class SolanaTime extends MainEvents{}
-class ClientTime extends MainEvents{}
-class BothTime extends MainEvents{}
-
-
-class Disconnected extends MainEvents{}
-class Connecting extends MainEvents{}
-class Connect extends MainEvents{}
-class ConnectionError extends MainEvents{}
+class SolanaTimeEvent extends MainEvents {}
+class ClientTimeEvent extends MainEvents {}
+class BothTimeEvent extends MainEvents {}
 
 
-class RunEvent extends MainEvents{}
-class StopEvent extends MainEvents{}
+
+class DisconnectedEvent extends MainEvents {}
+class ConnectingEvent extends MainEvents {}
+class ConnectEvent extends MainEvents {}
+class ConnectionErrorEvent extends MainEvents {}
+
+
+
+class RunEventEvent extends MainEvents {}
+class StopEventEvent extends MainEvents {}
