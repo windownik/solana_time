@@ -1,22 +1,15 @@
 import 'package:equatable/equatable.dart';
-import 'package:solana_time/presentation/bloc/events/network_events.dart';
-import 'events/process_events.dart';
-import 'events/time_event.dart';
 
 class MainState extends Equatable {
-  final NetworkState networkState;
-  final TimeEvents timeEvents;
-  final ProcessEvents processEvents;
+  final MainState mainState;
 
   const MainState._({
-    required this.networkState,
-    required this.timeEvents,
-    required this.processEvents,
+    required this.mainState,
 });
 
 
 
   @override
-  List<Object?> get props => [networkState, timeEvents, processEvents];
+  List<Object?> get props => [mainState];
 
 }
