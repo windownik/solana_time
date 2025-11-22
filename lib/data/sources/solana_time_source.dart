@@ -7,10 +7,18 @@ import 'package:web_socket_channel/web_socket_channel.dart';
 
 ///
 ///
-/// I make this code with OpenAi
+///
+/// I make this code with OpenAi and Grok
+///
+/// Prompts:
+/// Find correct url for solanaTime from ws?
+/// How do I parse the WebSocket response to read the Solana Clock sysvar time?
+/// What are methods like expect in dart?
+///
+/// Write readUInt64LE for web.
 ///
 ///
-///
+
 class SolanaApi {
   static const String url = "wss://mainnet.helius-rpc.com/?api-key=f25fb01f-c70a-4e75-a0f5-ecbc2de5627e";
   // static const String url = "wss://devnet.helius-rpc.com/?api-key=f25fb01f-c70a-4e75-a0f5-ecbc2de5627e";
