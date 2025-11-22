@@ -1,12 +1,12 @@
 
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:solana_time/presentation/bloc/main_bloc.dart';
-import 'package:solana_time/presentation/bloc/state/main_state.dart';
 
-import '../../utils/get_title_for_selector.dart';
 import '../bloc/events/main_event.dart';
+import '../bloc/main_bloc.dart';
+import '../bloc/state/main_state.dart';
 import '../bloc/state/state_types.dart';
+import '../utils/get_title_for_selector.dart';
 
 
 

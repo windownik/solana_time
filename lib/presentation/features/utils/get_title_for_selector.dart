@@ -1,7 +1,8 @@
 
 
-import '../presentation/bloc/state/state_types.dart';
 
+
+import '../bloc/state/state_types.dart';
 
 String getBtnTitle(TimeSource source) {
   switch (source) {

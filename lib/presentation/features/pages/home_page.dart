@@ -4,8 +4,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:solana_time/di/service_locator.dart';
 import 'package:solana_time/domain/repository/api.dart';
-import 'package:solana_time/presentation/bloc/main_bloc.dart';
 
+import '../bloc/main_bloc.dart';
 import '../widgets/run_stop_button.dart';
 import '../widgets/time_display_card.dart';
 import '../widgets/time_selector.dart';

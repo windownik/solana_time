@@ -12,7 +12,8 @@ import 'package:web_socket_channel/web_socket_channel.dart';
 ///
 ///
 class SolanaApi {
-  static const String url = "wss://devnet.helius-rpc.com/?api-key=f25fb01f-c70a-4e75-a0f5-ecbc2de5627e";
+  static const String url = "wss://mainnet.helius-rpc.com/?api-key=f25fb01f-c70a-4e75-a0f5-ecbc2de5627e";
+  // static const String url = "wss://devnet.helius-rpc.com/?api-key=f25fb01f-c70a-4e75-a0f5-ecbc2de5627e";
   WebSocketChannel? _channel;
   StreamController<DateTime>? _controller;
 
@@ -55,14 +56,14 @@ class SolanaApi {
 
         _controller?.add(dt);
       } catch (e) {
-        _controller!.addError(e);
+        print(["Solana Stream Error", e]);
       }
 
     },
         onError: (e) {
-          _controller?.addError(e);
+          print(["Solana Stream Error", e]);
     }, onDone: () {
-          _controller?.addError("Solana WebSocket closed");
+          print("Solana WebSocket closed",);
         }
     );
 
