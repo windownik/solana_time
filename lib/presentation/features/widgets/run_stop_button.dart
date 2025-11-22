@@ -13,15 +13,15 @@ class RunStopButton extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return BlocSelector<MainBloc, MainState, ProcessStatus>(
-      selector: (state) => state.runningState,
+      selector: (state) => state.processState,
       builder: (BuildContext context, ProcessStatus runningState) {
         print(["RunStopButton", runningState]);
         return ElevatedButton(
           onPressed: () {
             if (runningState == ProcessStatus.stop) {
-              BlocProvider.of<MainBloc>(context).add(RunEventEvent());
+              BlocProvider.of<MainBloc>(context).add(RunEvent());
             } else {
-              BlocProvider.of<MainBloc>(context).add(StopEventEvent());
+              BlocProvider.of<MainBloc>(context).add(StopEvent());
             }
           },
           style: ElevatedButton.styleFrom(

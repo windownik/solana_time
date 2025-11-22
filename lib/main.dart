@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:solana_time/presentation/pages/home_page.dart';
+import 'package:solana_time/presentation/features/pages/home_page.dart';
 import 'di/service_locator.dart';
 
 

@@ -3,35 +3,51 @@
 
 import 'dart:async';
 
+import '../../data/sources/solana_time_source.dart';
+
 
 class MainApi {
-  StreamController<DateTime>? _controller;
+  StreamController<DateTime>? _localTimeController;
   Timer? _timer;
+  SolanaApi solanaApi = SolanaApi();
 
   Stream<DateTime> startLocalStream() {
-    if (_controller != null) {
-      return _controller!.stream;
+    if (_localTimeController != null) {
+      return _localTimeController!.stream;
     }
-    _controller = StreamController<DateTime>.broadcast();
+    _localTimeController = StreamController<DateTime>.broadcast();
     _timer = Timer.periodic(Duration(seconds: 1), (_) {
-      if (_controller == null) return;
+      if (_localTimeController == null) return;
 
-      if (_controller!.isClosed) return;
-      _controller?.add(DateTime.now());
+      if (_localTimeController!.isClosed) return;
+      _localTimeController?.add(DateTime.now());
 
     });
-    return _controller!.stream;
+    return _localTimeController!.stream;
   }
 
   void closeLocalStream() {
     _timer?.cancel();
-    _controller?.close();
-    _controller = null;
+    _localTimeController?.close();
+    _localTimeController = null;
     _timer = null;
   }
 
 
+  Stream<DateTime> startSolanaStream() {
+    return solanaApi.startSolanaStream();
+  }
+
+
+  void closeSolanaStream() {
+    solanaApi.cancel();
+  }
+
+
+
   void dispose() {
+    solanaApi.cancel();
     closeLocalStream();
+    closeSolanaStream();
   }
 }

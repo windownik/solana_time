@@ -13,8 +13,9 @@ class ConnectionErrorEvent extends MainEvents {}
 
 
 
-class RunEventEvent extends MainEvents {}
-class StopEventEvent extends MainEvents {}
+class RunEvent extends MainEvents {}
+class StopEvent extends MainEvents {}
+
 
 
 class LocalDateTimeEvent extends MainEvents {
