@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
+import '../../../generated/l10n.dart';
 import '../../styles/text_styles.dart';
 import '../bloc/main_bloc.dart';
 import '../bloc/state/main_state.dart';
@@ -27,12 +28,11 @@ class TimeDisplayCard extends StatelessWidget {
             children: [
               if (state.processState == ProcessStatus.stop)
                 Text(
-                  "Stopped",
+                  S.of(context).statusStop,
                   style: CommonTextStyles.white18bold,
                 ),
 
               if (state.connectionState == ConnectionStatus.connecting)
-              // if (((state.solanaDateTime == null && state.timeState == TimeSource.solana) || (state.localDateTime == null && state.timeState == TimeSource.local))  && state.processState == ProcessStatus.run)
                 CircularProgressIndicator(),
 
               if (state.processState == ProcessStatus.run &&

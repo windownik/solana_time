@@ -2,6 +2,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
+import '../../../generated/l10n.dart';
 import '../../styles/text_styles.dart';
 import '../bloc/events/main_event.dart';
 import '../bloc/main_bloc.dart';
@@ -19,7 +20,6 @@ class TimeSelector extends StatelessWidget {
     return BlocSelector<MainBloc, MainState, TimeSource>(
       selector: (state) => state.timeState,
       builder: (BuildContext context, TimeSource timeState) {
-        print(["TimeSelector", timeState]);
 
         return Row(
         mainAxisSize: MainAxisSize.min,
@@ -56,6 +56,7 @@ class _Button extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final locale = S.of(context);
     return ElevatedButton(
         onPressed: () {
           switch (btnState) {
@@ -72,7 +73,7 @@ class _Button extends StatelessWidget {
             backgroundColor: btnState == activeState ? Colors.green : Colors.grey,
             padding: EdgeInsets.all(20)
         ),
-        child: Text(getBtnTitle(btnState), style: CommonTextStyles.white18bold,)
+        child: Text(getBtnTitle(btnState, locale), style: CommonTextStyles.white18bold,)
     );
   }
 }
