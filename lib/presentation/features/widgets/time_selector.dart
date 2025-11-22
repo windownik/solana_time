@@ -2,6 +2,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
+import '../../styles/text_styles.dart';
 import '../bloc/events/main_event.dart';
 import '../bloc/main_bloc.dart';
 import '../bloc/state/main_state.dart';
@@ -71,7 +72,7 @@ class _Button extends StatelessWidget {
             backgroundColor: btnState == activeState ? Colors.green : Colors.grey,
             padding: EdgeInsets.all(20)
         ),
-        child: Text(getBtnTitle(btnState), style: TextStyle(color: Colors.white, fontWeight: FontWeight.w600),)
+        child: Text(getBtnTitle(btnState), style: CommonTextStyles.white18bold,)
     );
   }
 }

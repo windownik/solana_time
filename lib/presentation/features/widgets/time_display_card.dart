@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
+import '../../styles/text_styles.dart';
 import '../bloc/main_bloc.dart';
 import '../bloc/state/main_state.dart';
 import '../bloc/state/state_types.dart';
@@ -27,11 +28,7 @@ class TimeDisplayCard extends StatelessWidget {
               if (state.processState == ProcessStatus.stop)
                 Text(
                   "Stopped",
-                  style: TextStyle(
-                    color: Colors.white,
-                    fontSize: 18,
-                    fontWeight: FontWeight.w600,
-                  ),
+                  style: CommonTextStyles.white18bold,
                 ),
 
               if (state.connectionState == ConnectionStatus.connecting)
@@ -44,11 +41,7 @@ class TimeDisplayCard extends StatelessWidget {
                       state.timeState == TimeSource.both))
                 Text(
                   "${state.localDateTime}",
-                  style: TextStyle(
-                    color: Colors.white,
-                    fontSize: 18,
-                    fontWeight: FontWeight.w600,
-                  ),
+                  style: CommonTextStyles.white18bold,
                 ),
 
               if (state.processState == ProcessStatus.run &&
@@ -57,11 +50,7 @@ class TimeDisplayCard extends StatelessWidget {
                       state.timeState == TimeSource.both))
                 Text(
                   "${state.solanaDateTime}",
-                  style: TextStyle(
-                    color: Colors.white,
-                    fontSize: 18,
-                    fontWeight: FontWeight.w600,
-                  ),
+                  style: CommonTextStyles.white18bold,
                 ),
             ],
           ),

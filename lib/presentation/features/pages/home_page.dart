@@ -5,6 +5,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:solana_time/di/service_locator.dart';
 import 'package:solana_time/domain/repository/api.dart';
 
+import '../../styles/text_styles.dart';
 import '../bloc/main_bloc.dart';
 import '../widgets/run_stop_button.dart';
 import '../widgets/time_display_card.dart';
@@ -21,7 +22,7 @@ class HomePage extends StatelessWidget {
       create: (BuildContext context) => MainBloc(api: getIt<MainApi>()),
       child: Scaffold(
         appBar: AppBar(
-          title: const Text("Solana Time App", style: TextStyle(color: Colors.white),),
+          title: Text("Solana Time App", style: CommonTextStyles.white24bold,),
           backgroundColor: Colors.deepPurple,
         ),
         body: const Stack(
