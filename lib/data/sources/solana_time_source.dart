@@ -53,11 +53,14 @@ class SolanaApi {
         if (jsonData["method"] != "accountNotification") return;
 
         final base64data = jsonData["params"]["result"]["value"]["data"][0];
+        print(base64data);
         final bytes = base64Decode(base64data);
-        final unixTs = readUInt64LE(bytes, 8);
+        print(bytes);
+        final unixTs = readUInt64LE(bytes, 32);
         final dt =
         DateTime.fromMillisecondsSinceEpoch(unixTs * 1000, isUtc: true)
             .toLocal();
+        print(dt);
         if (_controller == null) return;
 
         if (_controller!.isClosed) return;
@@ -92,9 +95,23 @@ class SolanaApi {
 
 // Helper for reading u64 on Flutter Web
 int readUInt64LE(Uint8List bytes, int offset) {
-  int result = 0;
-  for (int i = 0; i < 8; i++) {
-    result |= (bytes[offset + i] & 0xFF) << (8 * i);
+  int lo = 0;
+  int hi = 0;
+
+  // read 4 low bytes
+  for (int i = 0; i < 4; i++) {
+    lo |= (bytes[offset + i] & 0xFF) << (8 * i);
   }
-  return result;
+
+  // read 4 high bytes
+  for (int i = 0; i < 4; i++) {
+    hi |= (bytes[offset + 4 + i] & 0xFF) << (8 * i);
+  }
+
+  // если hi содержит знак
+  if (hi & 0x80000000 != 0) {
+    hi = hi - 0x100000000;
+  }
+
+  return (hi * 0x100000000) + lo;
 }
