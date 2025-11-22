@@ -2,15 +2,16 @@
 
 
 
+import '../../../generated/l10n.dart';
 import '../bloc/state/state_types.dart';
 
-String getBtnTitle(TimeSource source) {
+String getBtnTitle(TimeSource source, S locale) {
   switch (source) {
     case TimeSource.solana:
-      return "Solana";
+      return locale.selectorSolana;
     case TimeSource.local:
-      return "Client";
+      return locale.selectorLocal;
     case TimeSource.both:
-      return "Both";
+      return locale.selectorBoth;
   }
 }

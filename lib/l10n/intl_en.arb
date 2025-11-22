@@ -1,0 +1,9 @@
+
+{
+    "@@locale": "en",
+    "appTitle": "Solana Time Web App",
+    "selectorSolana": "Solana",
+    "selectorLocal": "Local",
+    "selectorBoth": "Both",
+    "statusStop": "Stopped"
+}
