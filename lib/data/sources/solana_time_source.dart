@@ -1,8 +1,7 @@
-
-
 import 'dart:async';
 import 'dart:typed_data';
 import 'dart:convert';
+import 'package:flutter/cupertino.dart';
 import 'package:web_socket_channel/web_socket_channel.dart';
 
 ///
@@ -18,9 +17,13 @@ import 'package:web_socket_channel/web_socket_channel.dart';
 /// Write readUInt64LE for web.
 ///
 ///
+///
+
+const int bytesOffset = 32;
 
 class SolanaApi {
-  static const String url = "wss://mainnet.helius-rpc.com/?api-key=f25fb01f-c70a-4e75-a0f5-ecbc2de5627e";
+  static const String url =
+      "wss://mainnet.helius-rpc.com/?api-key=f25fb01f-c70a-4e75-a0f5-ecbc2de5627e";
   // static const String url = "wss://devnet.helius-rpc.com/?api-key=f25fb01f-c70a-4e75-a0f5-ecbc2de5627e";
   WebSocketChannel? _channel;
   StreamController<DateTime>? _controller;
@@ -31,13 +34,9 @@ class SolanaApi {
     "method": "accountSubscribe",
     "params": [
       "SysvarC1ock11111111111111111111111111111111",
-      {
-        "encoding": "base64",
-        "commitment": "confirmed"
-      }
-    ]
+      {"encoding": "base64", "commitment": "confirmed"},
+    ],
   };
-
 
   Stream<DateTime> startSolanaStream() {
     if (_controller != null) return _controller!.stream;
@@ -46,43 +45,39 @@ class SolanaApi {
 
     _channel!.sink.add(jsonEncode(payload));
 
-    _channel!.stream.listen((rawData) {
-      if (_channel == null) return;
-      try {
-        final jsonData = jsonDecode(rawData);
-        if (jsonData["method"] != "accountNotification") return;
+    _channel!.stream.listen(
+      (rawData) {
+        if (_channel == null) return;
+        try {
+          final jsonData = jsonDecode(rawData);
+          if (jsonData["method"] != "accountNotification") return;
 
-        final base64data = jsonData["params"]["result"]["value"]["data"][0];
-        print(base64data);
-        final bytes = base64Decode(base64data);
-        print(bytes);
-        final unixTs = readUInt64LE(bytes, 32);
-        final dt =
-        DateTime.fromMillisecondsSinceEpoch(unixTs * 1000, isUtc: true)
-            .toLocal();
-        print(dt);
-        if (_controller == null) return;
+          final base64data = jsonData["params"]["result"]["value"]["data"][0];
+          final bytes = base64Decode(base64data);
+          final unixTs = readUInt64LE(bytes, bytesOffset);
+          final dt = DateTime.fromMillisecondsSinceEpoch(
+            unixTs * 1000,
+            isUtc: true,
+          ).toLocal();
+          if (_controller == null) return;
 
-        if (_controller!.isClosed) return;
+          if (_controller!.isClosed) return;
 
-        _controller?.add(dt);
-      } catch (e) {
-        print(["Solana Stream Error", e]);
-      }
-
-    },
-        onError: (e) {
+          _controller?.add(dt);
+        } catch (e) {
           print(["Solana Stream Error", e]);
-    }, onDone: () {
-          print("Solana WebSocket closed",);
         }
+      },
+      onError: (e) {
+        debugPrint("Solana Stream Error: $e");
+      },
+      onDone: () {
+        print("Solana WebSocket closed");
+      },
     );
 
     return _controller!.stream;
-
   }
-
-
 
   void cancel() {
     _channel?.sink.close();
@@ -91,7 +86,6 @@ class SolanaApi {
     _controller = null;
   }
 }
-
 
 // Helper for reading u64 on Flutter Web
 int readUInt64LE(Uint8List bytes, int offset) {
@@ -108,7 +102,7 @@ int readUInt64LE(Uint8List bytes, int offset) {
     hi |= (bytes[offset + 4 + i] & 0xFF) << (8 * i);
   }
 
-  // если hi содержит знак
+  // if hi contains a sign
   if (hi & 0x80000000 != 0) {
     hi = hi - 0x100000000;
   }
