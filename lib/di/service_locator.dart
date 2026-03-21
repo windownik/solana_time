@@ -1,11 +1,10 @@
-
 import 'package:get_it/get_it.dart';
 
-import '../domain/repository/api.dart';
+import '../data/repository/main_api_impl.dart';
+import '../domain/repository/i_main_api.dart';
 
 final getIt = GetIt.instance;
 
-
 void setupGetIt() {
-  getIt.registerLazySingleton<MainApi>(() => MainApi());
+  getIt.registerLazySingleton<IMainApi>(() => MainApi());
 }

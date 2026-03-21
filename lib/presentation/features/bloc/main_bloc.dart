@@ -1,15 +1,14 @@
 import 'dart:async';
 
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:solana_time/domain/repository/api.dart';
 import 'package:solana_time/presentation/features/bloc/state/main_state.dart';
 import 'package:solana_time/presentation/features/bloc/state/state_types.dart';
 
+import '../../../domain/repository/i_main_api.dart';
 import 'events/main_event.dart';
 
-
 class MainBloc extends Bloc<MainEvents, MainState> {
-  final MainApi api;
+  final IMainApi api;
   StreamSubscription<DateTime>? _localDateStream;
   StreamSubscription<DateTime>? _solanaDateStream;
 
@@ -53,11 +52,9 @@ class MainBloc extends Bloc<MainEvents, MainState> {
         state.timeState == TimeSource.both) {
       _runLocal();
     }
-    // emit(state.copyWith(networkState: ConnectionStatus.connect,));
   }
 
   _onGetSolanaDateTime(SolanaDateTimeEvent event, Emitter<MainState> emit) {
-    // print(["SolanaDateTimeEvent", event.time]);
     ConnectionStatus? networkState;
     if (state.solanaDateTime == null) {
       networkState = ConnectionStatus.connect;
@@ -77,7 +74,6 @@ class MainBloc extends Bloc<MainEvents, MainState> {
   }
 
   _onGetLocalDateTime(LocalDateTimeEvent event, Emitter<MainState> emit) {
-    // print(["LocalDateTime", event.time]);
     ConnectionStatus? networkState;
     if (state.localDateTime == null) {
       networkState = ConnectionStatus.connect;

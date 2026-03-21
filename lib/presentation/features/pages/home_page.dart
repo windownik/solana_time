@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:solana_time/di/service_locator.dart';
-import 'package:solana_time/domain/repository/api.dart';
 
+import '../../../domain/repository/i_main_api.dart';
 import '../../../generated/l10n.dart';
 import '../../styles/text_styles.dart';
 import '../bloc/main_bloc.dart';
@@ -16,7 +16,7 @@ class HomePage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return BlocProvider<MainBloc>(
-      create: (BuildContext context) => MainBloc(api: getIt<MainApi>()),
+      create: (BuildContext context) => MainBloc(api: getIt<IMainApi>()),
       child: Scaffold(
         appBar: AppBar(
           title: Text(
