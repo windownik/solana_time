@@ -2,11 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:solana_time/presentation/features/pages/home_page.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
 
-
 import 'generated/l10n.dart';
-
-
-
 
 class MyApp extends StatelessWidget {
   const MyApp({super.key});
