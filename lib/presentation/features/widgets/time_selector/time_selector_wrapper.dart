@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:solana_time/presentation/features/widgets/time_selector/time_selector.dart';
+import 'package:solana_time/presentation/features/widgets/time_selector/time_selector_view.dart';
 
 import '../../bloc/events/main_event.dart';
 import '../../bloc/main_bloc.dart';
@@ -26,7 +26,10 @@ class TimeSelectorWrapper extends StatelessWidget {
     return BlocSelector<MainBloc, MainState, TimeSource>(
       selector: (state) => state.timeState,
       builder: (BuildContext context, TimeSource timeState) {
-        return TimeSelectorView(onChangeSource: _onTapSolanaTime);
+        return TimeSelectorView(
+          onChangeSource: _onTapSolanaTime,
+          activeTimeSource: timeState,
+        );
       },
     );
   }
